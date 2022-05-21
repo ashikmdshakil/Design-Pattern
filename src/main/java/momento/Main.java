@@ -2,26 +2,22 @@ package momento;
 
 public class Main {
     public static void main(String[] args){
-        var caretaker = new Caretaker();
-        var editor =  new Editor(caretaker);
-        var editorState =  new EditorState();
+        var editor =  new Editor();
+        var history =  new History();
 
-        editor.createState(editorState, "Ashik");
-        System.out.println("Present content is "+editorState.getContent());
+        editor.setContent("ashik");
+        history.push(editor.createContent());
 
-        editor.createState(editorState, "Muhammad");
-        System.out.println("Present content is "+editorState.getContent());
+        editor.setContent("Muhammad");
+        history.push(editor.createContent());
 
-        editor.createState(editorState, "Shakil");
-        System.out.println("Present content is "+editorState.getContent());
+        editor.setContent("shakil");
+        history.push(editor.createContent());
 
-        caretaker.getStates().stream().forEach(state ->{
-            System.out.println(state.getContent());
-        });
+        editor.remove(history.pop());
 
-        System.out.println("the popping content is "+editor.removeState(editorState));
+        System.out.println(editor.getContent());
 
-        System.out.println("present content is "+editorState.getContent());
 
 
     }
